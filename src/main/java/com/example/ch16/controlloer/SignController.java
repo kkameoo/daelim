@@ -14,7 +14,7 @@ public class SignController {
     private final SignService signService;
 
     @Autowired
-    private SignController(SignService signService) {
+    public SignController(SignService signService) {
         this.signService =  signService;
     }
     @PostMapping("/sign-in")

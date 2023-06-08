@@ -31,15 +31,15 @@ public class SignServiceImpl implements SignService {
         System.out.println("[signup] 회원가입");
         User user;
         if (role.equalsIgnoreCase("admin")) {
-            user = User.builder().uid(id).name(name).password(passwordEncoder.encode(password))
+            user = User.builder().uid(id).name(name).emaail(email).password(passwordEncoder.encode(password))
                     .roles(Collections.singletonList("ROLE_ADMIN")).build();
         } else {
-            user = User.builder().uid(id).name(name).password(passwordEncoder.encode(password))
-                    .roles(Collections.singletonList("ROLE_ADMIN")).build();
+            user = User.builder().uid(id).name(name).emaail(email).password(passwordEncoder.encode(password))
+                    .roles(Collections.singletonList("ROLE_USER")).build();
         }
         User savedUser = userRepository.save(user);
         SignupResultDto signupResultDto = new SignupResultDto();
-        if (savedUser.getName().isEmpty()) {
+        if (!savedUser.getName().isEmpty()) {
             setSuccessResult(signupResultDto);
         } else {
             setFailResult(signupResultDto);
